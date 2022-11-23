@@ -6,7 +6,7 @@ import Url from './src/models/Url.js';
 import config from './config.json' assert { type: "json" };
 
 // import modules
-import generatorUrl from './src/modules/generatorUrl.js';
+import generatorUrl from './src/func/generatorUrl.js';
 
 
 
