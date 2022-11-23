@@ -1,0 +1,25 @@
+<%- include('header'); -%>
+
+
+
+    <body>
+        <main role="main">
+            <form action="/" method="POST">
+
+                <input type="text" name="fullUrl" placeholder="https://www.facebook.com/"
+                    pattern="^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$"
+                    required>
+
+                <button type="submit">enter</button>
+            </form>
+        </main>
+
+    </body>
+
+
+
+
+
+    <!--
+    <%- include('footer'); -%>
+     -->
