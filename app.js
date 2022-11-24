@@ -34,8 +34,8 @@ mongoose.connect(MONGO_URL, {
 const db = mongoose.connection;
 
 
-db.on('error', () => {
-    console.log('mongodb error!');
+db.on('error', (err) => {
+    console.log('mongodb error: ' + err);
 });
 
 db.once('open', () => {
@@ -47,17 +47,22 @@ db.once('open', () => {
 
 
 const app = express();
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
 
 app.get('/', (req, res) => {
-    res.render('index');
+    let resData = {
+        name: "",
+        key: "",
+        newUrl: ""
+    };
+    res.render('index', {data:resData});
 })
 
-app.post('/', (req, res) => {
+app.post('/', urlencodedParser, (req, res) => {
     let fullUrl = req.body.fullUrl;
     let key = generatorUrl(fullUrl);
 
@@ -76,16 +81,24 @@ app.post('/', (req, res) => {
                 console.log(result);
             }
         }*/)
-        .then(user => {
-            console.log(newUrl.key);
+        .then(() => {
             res.redirect(`/new/${newUrl.key}`);
+            /*
+            let resData = {
+                name: newUrl.name,
+                key: newUrl.key,
+                newUrl: newUrlPrefix + newUrl.key
+            };
+            res.render("index", {data: resData});*/
+            //res.send(resData);
+            console.log(resData);
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
 
 
 
 
-    console.log(newUrl);
+    //console.log(newUrl);
 })
 
 

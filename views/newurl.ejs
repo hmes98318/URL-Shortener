@@ -1,5 +1,4 @@
-<%- include('header'); -%>
-
+<%- include('modules/header'); -%>
 
 
     <body>
@@ -9,22 +8,17 @@
                 <%= newUrl %>
             </a>
 
-            <button onclick="copy('shortUrl')">copy url</button>
+            <button onclick="copyContent()">copy url</button>
             <button onclick="location.href='<%= homePage %>'">home page</button>
         </h4>
     </body>
 
 
 
-    <script>
-        function copy(id) {
-            var str = document.getElementById(id);
-            window.getSelection().selectAllChildren(str);
-            document.execCommand("Copy")
-        }
-    </script>
+    <%- include('modules/script'); -%>
 
 
-    <!--
-    <%- include('footer'); -%>
+
+        <!--
+    <%- include('modules/footer'); -%>
      -->
