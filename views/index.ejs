@@ -1,9 +1,9 @@
 <%- include('modules/header'); -%>
 
 
-
     <body>
         <main role="main">
+            <p>
             <form action="/" method="POST">
 
                 <input type="text" name="fullUrl" placeholder="https://www.facebook.com/"
@@ -11,15 +11,29 @@
                     required>
 
                 <button type="submit">enter</button>
+
             </form>
+            </p>
+
+            <p>
+                <%if (data.name) {%>
+                    <a href="<%= data.newUrl %>" id="shortUrl">
+                        <%= data.newUrl %>
+                    </a>
+                    <button onclick="copy()">copy url</button>
+                    <button onclick=" window.open('<%= data.newUrl %>','_blank')" target="_black">link</button>
+
+                    <% } %>
+            </p>
         </main>
 
     </body>
 
 
 
+    <%- include('modules/script'); -%>
 
 
-    <!--
+        <!--
     <%- include('modules/footer'); -%>
      -->

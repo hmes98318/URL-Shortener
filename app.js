@@ -54,13 +54,14 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', (req, res) => {
+
     let resData = {
-        name: "",
-        key: "",
-        newUrl: ""
+        name: null,
+        key: null,
+        newUrl: null
     };
     res.render('index', {data:resData});
-})
+});
 
 app.post('/', urlencodedParser, (req, res) => {
     let fullUrl = req.body.fullUrl;
@@ -82,42 +83,18 @@ app.post('/', urlencodedParser, (req, res) => {
             }
         }*/)
         .then(() => {
-            res.redirect(`/new/${newUrl.key}`);
-            /*
+
             let resData = {
                 name: newUrl.name,
                 key: newUrl.key,
                 newUrl: newUrlPrefix + newUrl.key
             };
-            res.render("index", {data: resData});*/
-            //res.send(resData);
+
+            res.render("index", {data: resData});
             console.log(resData);
         })
         .catch((err) => console.log(err));
-
-
-
-
-    //console.log(newUrl);
-})
-
-
-
-
-app.get('/new/:key', (req, res) => {
-    Url.findOne({ key: req.params.key }, (err, url) => {
-        if (err) return console.error(err)
-
-
-        let newUrl = newUrlPrefix + url.key;
-        let homePage = redirectPrefix;
-
-        console.log('newUrl: ' + newUrl + '\nname: ' + url.name);
-
-        return res.render('newurl', { url, newUrl, homePage });
-    });
 });
-
 
 
 app.get('/:key', (req, res) => {
@@ -132,7 +109,6 @@ app.get('/:key', (req, res) => {
         }
     });
 });
-
 
 
 app.listen(PORT, () => {

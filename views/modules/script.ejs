@@ -1,7 +1,7 @@
 <script>
     let text = document.getElementById('shortUrl').innerHTML;
 
-    const copyContent = async () => {
+    const copy = async () => {
         try {
             await navigator.clipboard.writeText(text);
             console.log('Content copied to clipboard');
