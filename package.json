@@ -4,7 +4,7 @@
   "description": "short url",
   "main": "app.js",
   "scripts": {
-    "start": "node ./app.js",
+    "start": "node ./index.js",
     "dev": "tsc && npm start"
   },
   "repository": {
@@ -20,8 +20,10 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "helmet": "^6.0.0",
     "mongoose": "^6.7.3"
   },
   "devDependencies": {
