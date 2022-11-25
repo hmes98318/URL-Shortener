@@ -77,6 +77,9 @@ app.get('/:key', (req, res) => {
         }
     });
 });
+app.get('/*', (req, res) => {
+    return res.redirect(redirectPrefix);
+});
 app.listen(PORT, () => {
     console.log(`Server start listening: ${HOST}:${PORT}`);
 });

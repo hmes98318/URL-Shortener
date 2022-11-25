@@ -107,6 +107,12 @@ app.get('/:key', (req, res) => {
 });
 
 
+// Undefined directory redirect to the root directory
+app.get('/*', (req, res) => {
+    return res.redirect(redirectPrefix);
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server start listening: ${HOST}:${PORT}`);
 });
