@@ -45,7 +45,7 @@ export class App {
      */
 
     private setEnvironment(): void {
-        dotenv.config({ path: path.resolve(__dirname, './environments/app.env') });
+        dotenv.config({ path: path.resolve(__dirname, '../../src/environments/app.env') });
 
         let host = process.env.HOST;
         let port = Number(process.env.PORT);
@@ -60,7 +60,7 @@ export class App {
 
     private setEJS(): void {
         this.app.set('view engine', 'ejs');
-        this.app.set('views', path.join(__dirname, './views'));
+        this.app.set('views', path.join(__dirname, '../../src/views'));
 /*
         this.app.all('*', (req, res, next) => {
             res.setHeader("Access-Control-Allow-Origin", "*");

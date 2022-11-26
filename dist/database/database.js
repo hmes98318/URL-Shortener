@@ -17,7 +17,7 @@ class Database {
             .catch(err => console.log('mongodb error: ' + err));
     }
     setEnvironment() {
-        dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../environments/mongodb.env') });
+        dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../../src/environments/mongodb.env') });
     }
 }
 exports.Database = Database;
