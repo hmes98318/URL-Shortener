@@ -47,18 +47,7 @@ class App {
     }
     setEJS() {
         this.app.set('view engine', 'ejs');
-        this.app.set('views', path_1.default.join(__dirname, '../../src/views'));
-        /*
-                this.app.all('*', (req, res, next) => {
-                    res.setHeader("Access-Control-Allow-Origin", "*");
-                    res.setHeader("Access-Control-Allow-Methods", "GET, POST");
-                    res.setHeader("Access-Control-Max-Age", "3600");
-                    res.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization,token, content-type");
-                    res.setHeader("Access-Control-Allow-Credentials", "true");
-                    res.setHeader("Content-type", "application/json; charset=UTF-8");
-        
-                    next();
-                })*/
+        this.app.set('views', path_1.default.join(__dirname, '../../views'));
     }
     registerRoute() {
         this.app.get('/', (req, res) => {
@@ -91,15 +80,17 @@ class App {
                     key: newUrl.key,
                     newUrl: this.newUrlPrefix + newUrl.key
                 };
-                res.render("index", { data: resData });
+                res.render('index', { data: resData });
                 console.log(resData);
             })
                 .catch((err) => console.log(err));
         });
         this.app.get('/:key', (req, res) => {
             Url_1.default.findOne({ key: req.params.key }, (err, url) => {
-                if (err)
+                if (err) { // mongodb error
+                    res.render('502');
                     return console.error(err);
+                }
                 if (!url) {
                     return res.redirect(this.redirectPrefix);
                 }
