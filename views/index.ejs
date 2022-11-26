@@ -3,18 +3,19 @@
 
     <body>
         <main role="main">
-            <p>
-            <form action="/" method="POST">
+            <div class="box">
+                <p>
+                <form action="/" method="POST">
 
-                <input type="text" name="fullUrl" placeholder="https://www.facebook.com/"
-                    pattern="^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$"
-                    required>
+                    <input type="text" name="fullUrl" placeholder="https://www.facebook.com/"
+                        pattern="^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$"
+                        required>
 
-                <button type="submit">enter</button>
+                    <button type="submit">enter</button>
 
-            </form>
-            </p>
-
+                </form>
+                </p>
+            </div>
             <p>
                 <%if (data.name) {%>
                     <a href="<%= data.newUrl %>" id="shortUrl">
