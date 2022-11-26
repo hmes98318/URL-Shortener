@@ -8,9 +8,9 @@ const path_1 = __importDefault(require("path"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const Url_1 = __importDefault(require("./models/Url"));
+const Url_1 = __importDefault(require("../models/Url"));
 // import modules
-const generatorUrl_1 = __importDefault(require("./func/generatorUrl"));
+const generatorUrl_1 = __importDefault(require("../func/generatorUrl"));
 class App {
     constructor() {
         this.app = (0, express_1.default)();

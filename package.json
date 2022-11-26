@@ -4,14 +4,15 @@
   "description": "short url",
   "main": "app.js",
   "scripts": {
-    "start": "node ./index.js",
-    "dev": "tsc && npm start"
+    "start": "npm run build && node ./dist/index.js",
+    "build": "tsc",
+    "dev": "ts-node ./src/index.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hmes98318/URL-Shortener.git"
   },
-  "author": "hmes98318",
+  "author": "hmes98318 <hmes98318@gmail.com>",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/hmes98318/URL-Shortener/issues"
@@ -24,10 +25,12 @@
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "helmet": "^6.0.0",
-    "mongoose": "^6.7.3"
+    "mongoose": "^6.7.3",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
-    "@types/express": "^4.17.14"
+    "@types/express": "^4.17.14",
+    "typescript": "^4.9.3"
   }
 }

@@ -1,5 +1,5 @@
-import { Database } from './src/database/database'
-import { App } from './src/app';
+import { Database } from './database/database'
+import { App } from './app/app';
 
 
 

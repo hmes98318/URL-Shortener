@@ -5,10 +5,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 
-import Url from './models/Url';
+import Url from '../models/Url';
 
 // import modules
-import generatorUrl from './func/generatorUrl';
+import generatorUrl from '../func/generatorUrl';
 
 
 
