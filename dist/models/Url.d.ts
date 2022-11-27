@@ -24,10 +24,12 @@
 /// <reference types="mongoose/types/inferschematype" />
 import { Schema } from 'mongoose';
 declare const _default: import("mongoose").Model<{
-    name: string;
     key: string;
+    longUrl: string;
+    shortUrl: string;
 }, {}, {}, {}, Schema<any, import("mongoose").Model<any, any, any, any, any>, {}, {}, {}, {}, "type", {
-    name: string;
     key: string;
+    longUrl: string;
+    shortUrl: string;
 }>>;
 export default _default;

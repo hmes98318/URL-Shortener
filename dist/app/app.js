@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -10,7 +19,7 @@ const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const Url_1 = __importDefault(require("../models/Url"));
 // import modules
-const generatorUrl_1 = __importDefault(require("../func/generatorUrl"));
+const generateKey_1 = __importDefault(require("../func/generateKey"));
 class App {
     constructor() {
         this.app = (0, express_1.default)();
@@ -51,54 +60,62 @@ class App {
     }
     registerRoute() {
         this.app.get('/', (req, res) => {
-            let resData = {
+            let emptyData = {
                 name: null,
                 key: null,
                 newUrl: null
             };
-            res.render('index', { data: resData });
+            return res.render('index', { data: emptyData });
         });
-        this.app.post('/', this.urlencodedParser, (req, res) => {
-            let fullUrl = req.body.fullUrl;
-            let key = (0, generatorUrl_1.default)(fullUrl);
-            const newUrl = new Url_1.default({
-                name: fullUrl,
-                key: key
+        this.app.post('/', this.urlencodedParser, (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const fullUrl = req.body.fullUrl;
+            const longUrlData = {
+                longUrl: fullUrl
+            };
+            let urlInfo = yield Url_1.default.findOne(longUrlData)
+                .catch((err) => {
+                console.error(err);
+                return res.render('502');
             });
-            newUrl
-                .save( /* (err, result)=> {
-                if (err) {
-                    console.log(err);
-                }
-                else {
-                    console.log(result);
-                }
-            }*/)
-                .then(() => {
-                let resData = {
-                    name: newUrl.name,
-                    key: newUrl.key,
-                    newUrl: this.newUrlPrefix + newUrl.key
+            if (urlInfo == null) {
+                let key = '';
+                do {
+                    key = (0, generateKey_1.default)(5);
+                    urlInfo = yield Url_1.default.findOne({ key: key });
+                } while (urlInfo !== null);
+                const newData = {
+                    key: key,
+                    longUrl: fullUrl,
+                    shortUrl: this.newUrlPrefix + key
                 };
-                res.render('index', { data: resData });
-                console.log(resData);
-            })
-                .catch((err) => console.log(err));
-        });
-        this.app.get('/:key', (req, res) => {
-            Url_1.default.findOne({ key: req.params.key }, (err, url) => {
-                if (err) { // mongodb error
-                    res.render('502');
-                    return console.error(err);
-                }
-                if (!url) {
-                    return res.redirect(this.redirectPrefix);
-                }
-                else {
-                    return res.redirect(url.name);
-                }
+                const shortenerData = new Url_1.default(newData);
+                shortenerData
+                    .save()
+                    .catch((err) => {
+                    console.error(err);
+                    return res.render('502');
+                });
+                return res.render('index', { data: newData });
+            }
+            return res.render('index', { data: urlInfo });
+        }));
+        this.app.get('/:key', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const shortKey = req.params.key;
+            const shortUrlData = {
+                key: shortKey
+            };
+            const urlInfo = yield Url_1.default.findOne(shortUrlData)
+                .catch((err) => {
+                console.error(err);
+                return res.render('502');
             });
-        });
+            if (urlInfo != null) {
+                return res.redirect(302, urlInfo.longUrl);
+            }
+            else {
+                return res.redirect(this.redirectPrefix);
+            }
+        }));
         // Undefined directory redirect to the root directory
         this.app.get('/*', (req, res) => {
             return res.redirect(this.redirectPrefix);
