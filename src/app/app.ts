@@ -8,7 +8,7 @@ import helmet from 'helmet';
 import Url from '../models/Url';
 
 // import modules
-import generatorUrl from '../func/generatorUrl';
+import generateKey from '../func/generateKey';
 
 
 
@@ -66,62 +66,78 @@ export class App {
     private registerRoute(): void {
         this.app.get('/', (req, res) => {
 
-            let resData = {
+            let emptyData = {
                 name: null,
                 key: null,
                 newUrl: null
             };
-            res.render('index', { data: resData });
+            return res.render('index', { data: emptyData });
         });
 
-        this.app.post('/', this.urlencodedParser, (req, res) => {
-            let fullUrl = req.body.fullUrl;
-            let key = generatorUrl(fullUrl);
+        this.app.post('/', this.urlencodedParser, async (req, res) => {
 
-            const newUrl = new Url({
-                name: fullUrl,
-                key: key
-            });
+            const fullUrl = req.body.fullUrl;
+            const longUrlData = {
+                longUrl: fullUrl
+            }
+
+            let urlInfo = await Url.findOne(longUrlData)
+                .catch((err) => {
+                    console.error(err);
+                    return res.render('502');
+                });
 
 
-            newUrl
-                .save(/* (err, result)=> {
-                    if (err) {
-                        console.log(err);
-                    }
-                    else {
-                        console.log(result);
-                    }
-                }*/)
-                .then(() => {
+            if (urlInfo == null) {
+                let key = '';
 
-                    let resData = {
-                        name: newUrl.name,
-                        key: newUrl.key,
-                        newUrl: this.newUrlPrefix + newUrl.key
-                    };
+                do {
+                    key = generateKey(5);
+                    urlInfo = await Url.findOne({ key: key });
+                } while (urlInfo !== null);
 
-                    res.render('index', { data: resData });
-                    console.log(resData);
-                })
-                .catch((err) => console.log(err));
+
+                const newData = {
+                    key: key,
+                    longUrl: fullUrl,
+                    shortUrl: this.newUrlPrefix + key
+                };
+
+                const shortenerData = new Url(newData);
+                shortenerData
+                    .save()
+                    .catch((err) => {
+                        console.error(err);
+                        return res.render('502');
+                    });
+
+                return res.render('index', { data: newData });
+            }
+
+            return res.render('index', { data: urlInfo });
         });
 
-        this.app.get('/:key', (req, res) => {
-            Url.findOne({ key: req.params.key }, (err: any, url: any) => {
-                if (err) { // mongodb error
-                    res.render('502');
-                    return console.error(err);
-                }
+        this.app.get('/:key', async (req, res) => {
 
-                if (!url) {
-                    return res.redirect(this.redirectPrefix);
-                }
-                else {
-                    return res.redirect(url.name);
-                }
-            });
+            const shortKey = req.params.key;
+            const shortUrlData = {
+                key: shortKey
+            };
+
+            const urlInfo = await Url.findOne(shortUrlData)
+                .catch((err) => {
+                    console.error(err);
+                    return res.render('502');
+                });
+
+            if (urlInfo != null) {
+                return res.redirect(302, urlInfo.longUrl);
+            }
+            else {
+                return res.redirect(this.redirectPrefix);
+            }
         });
+
 
         // Undefined directory redirect to the root directory
         this.app.get('/*', (req, res) => {

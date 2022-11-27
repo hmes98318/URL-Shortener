@@ -17,12 +17,12 @@
                 </p>
             </div>
             <p>
-                <%if (data.name) {%>
-                    <a href="<%= data.newUrl %>" id="shortUrl">
-                        <%= data.newUrl %>
+                <%if (data?.key != null) {%>
+                    <a href="<%= data.shortUrl %>" id="shortUrl">
+                        <%= data.shortUrl %>
                     </a>
                     <button onclick="copy()">copy url</button>
-                    <button onclick=" window.open('<%= data.newUrl %>','_blank')" target="_black">link</button>
+                    <button onclick=" window.open('<%= data.shortUrl %>','_blank')" target="_black">link</button>
 
                     <% } %>
             </p>
