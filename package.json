@@ -1,43 +1,48 @@
 {
-  "name": "url-shortener",
-  "version": "1.0.0",
-  "description": "short url",
-  "main": "app.js",
-  "scripts": {
-    "start": "npm run build && node ./dist/index.js",
-    "build": "tsc",
-    "dev": "ts-node ./src/index.ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hmes98318/URL-Shortener.git"
-  },
-  "author": "hmes98318 <hmes98318@gmail.com>",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/hmes98318/URL-Shortener/issues"
-  },
-  "homepage": "https://github.com/hmes98318/URL-Shortener#readme",
-  "dependencies": {
-    "@chakra-ui/react": "^2.4.2",
-    "@icon-park/react": "^1.4.2",
-    "axios": "^1.2.0",
-    "body-parser": "^1.20.1",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "helmet": "^6.0.0",
-    "is-url": "^1.2.4",
-    "mongoose": "^6.7.3",
-    "next": "^13.0.6",
-    "next-i18next": "^13.0.0",
-    "react": "^18.2.0",
-    "ts-node": "^10.9.1"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.14",
-    "@types/is-url": "^1.2.30",
-    "@types/node": "^18.11.10",
-    "@types/react": "^18.0.25",
-    "typescript": "^4.9.3"
-  }
+    "name": "url-shortener",
+    "version": "1.0.0",
+    "description": "short url",
+    "main": "app.js",
+    "scripts": {
+        "start": "npm run build && node ./dist/index.js",
+        "build": "tsc",
+        "dev": "ts-node ./src/index.ts",
+        "dev:next": "next dev",
+        "build:next": "next build",
+        "start:next": "next start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hmes98318/URL-Shortener.git"
+    },
+    "author": "hmes98318 <hmes98318@gmail.com>",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/hmes98318/URL-Shortener/issues"
+    },
+    "homepage": "https://github.com/hmes98318/URL-Shortener#readme",
+    "dependencies": {
+        "@chakra-ui/react": "^2.4.2",
+        "@icon-park/react": "^1.4.2",
+        "axios": "^1.2.0",
+        "body-parser": "^1.20.1",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "helmet": "^6.0.0",
+        "is-url": "^1.2.4",
+        "mongoose": "^6.7.3",
+        "next": "^13.0.6",
+        "next-i18next": "^13.0.0",
+        "react": "^18.2.0",
+        "react-copy-to-clipboard": "^5.1.0",
+        "ts-node": "^10.9.1"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.14",
+        "@types/is-url": "^1.2.30",
+        "@types/node": "^18.11.10",
+        "@types/react": "^18.0.25",
+        "@types/react-copy-to-clipboard": "^5.0.4",
+        "typescript": "^4.9.3"
+    }
 }
