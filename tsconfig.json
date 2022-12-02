@@ -113,8 +113,9 @@
         "src/**/*.ts",
         "page/*.tsx",
         "public/**/*.tsx",
+        "public/images/custom.d.ts",
+        "public/images/*.svg",
         "public/images/*.png",
-        "public/images/*.svg"
     ],
     "exclude": [
         "node_modules",
