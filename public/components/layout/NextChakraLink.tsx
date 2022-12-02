@@ -1,5 +1,4 @@
-import React from 'react';
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from 'react';
 import NextLink from "next/link";
 import { LinkProps as NextLinkProps } from "next/dist/client/link";
 import { Link, LinkProps } from "@chakra-ui/react";

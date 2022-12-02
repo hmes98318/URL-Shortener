@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, HStack, Spacer } from '@chakra-ui/react';
+import { Box, HStack, Spacer, Text } from '@chakra-ui/react';
 
-import { Logo } from '../../Logo';
+import { Logo } from '../Logo';
 import { Layout } from '../layout';
 
 
@@ -15,7 +15,8 @@ export const Header = () => {
 				px={{ base: '4', md: '8' }}
 			>
 				<HStack>
-					<Logo size={80} />
+					<Text>Powered by</Text>
+					<Logo size={60} />
 					<Spacer />
 				</HStack>
 			</Box>
