@@ -16,11 +16,12 @@ import {
     useClipboard
 } from '@chakra-ui/react';
 import { Check, Copy, Refresh } from '@icon-park/react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import isUrl from 'is-url';
 import axios from 'axios';
 
 import { Layout } from '../public/components/layout/layout';
-import { NextChakraLink } from '../public/components/NextChakraLink';
+import { NextChakraLink } from '../public/components/layout/NextChakraLink';
 
 import type { NextPage } from 'next';
 
@@ -38,11 +39,10 @@ const Home: NextPage = () => {
     const bgColor = useColorModeValue('gray.200', 'rgba(132,133,141,0.12)');
 
     const [url, setUrl] = useState<string>('');
-    const [shortUrl, setShortUrl] = useState('');
+    const [shortUrl, setShortUrl] = useState<string>('');
     const [loading, setLoading] = useState(false);
 
-    //navigator.clipboard.writeText(shortUrl);
-    const { hasCopied, onCopy } = useClipboard(shortUrl);
+    const { hasCopied, onCopy } = useClipboard(shortUrl, 5000);
 
 
     const handleClick = async () => {
@@ -53,17 +53,16 @@ const Home: NextPage = () => {
             method: 'POST',
             data: JSON.stringify({ fullUrl: url })
         }
-        console.log(sendData)
+        console.log(sendData);
 
 
         const res = await axios.post('/api', sendData)
         setLoading(false);
-        console.log(res.data)
+        console.log(res.data);
 
         if (res.status === 201) {
             const { data } = await res.data;
             setShortUrl(data.shortUrl);
-            navigator.clipboard.writeText(data.shortUrl);
         }
         else {
             toast({
@@ -79,7 +78,7 @@ const Home: NextPage = () => {
         <Layout>
             <Center>
                 <Heading>
-                    Home
+                    URL-Shortener
                 </Heading>
             </Center>
             <VStack minH="30vh" padding={3} spacing={10} mt={'100px'}>
@@ -135,14 +134,16 @@ const Home: NextPage = () => {
                                     {shortUrl}
                                 </NextChakraLink>
                                 <Spacer />
-                                <Button
-                                    w={{ base: '3xs', md: '25%' }}
-                                    p={3}
-                                    onClick={onCopy}
-                                    leftIcon={hasCopied ? <Check fill="#7ed321" /> : <Copy />}
-                                >
-                                    {hasCopied ? 'copied' : 'copy'}
-                                </Button>
+                                <CopyToClipboard text={shortUrl}>
+                                    <Button
+                                        w={{ base: '3xs', md: '25%' }}
+                                        p={3}
+                                        onClick={onCopy}
+                                        leftIcon={hasCopied ? <Check fill="#7ed321" /> : <Copy />}
+                                    >
+                                        {hasCopied ? 'copied' : 'copy'}
+                                    </Button>
+                                </CopyToClipboard>
                             </Stack>
                         </Box>
                     </>
