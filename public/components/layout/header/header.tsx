@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, HStack, Spacer, Text } from '@chakra-ui/react';
 
-import { Logo } from '../Logo';
+import { Logo } from '../../Logo';
 import { Layout } from '../layout';
 
 

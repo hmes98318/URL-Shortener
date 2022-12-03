@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { HStack } from '@chakra-ui/react';
 
-import { Svg } from '../../images/nextjs';
+import { Svg } from '../images/nextjs';
 
 
 interface LogoProps {
