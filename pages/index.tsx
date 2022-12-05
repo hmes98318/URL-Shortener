@@ -20,7 +20,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import isUrl from 'is-url';
 import axios from 'axios';
 
-import { Layout } from '../public/components/layout';
+import { Layout } from '../public/components/layout/layout';
 import { NextChakraLink } from '../public/components/NextChakraLink';
 
 import type { NextPage } from 'next';

@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 import { Box } from '@chakra-ui/react';
 import Head from 'next/head';
 
-import { Header } from './layout/header/header';
-import { Footer } from './layout/footer/footer';
+import { Header } from './header/header';
+import { Footer } from './footer/footer';
 
 
 interface IProps {

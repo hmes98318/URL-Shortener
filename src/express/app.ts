@@ -57,9 +57,9 @@ export class App {
     private setEnvironment(): void {
         dotenv.config({ path: path.resolve(__dirname, '../../src/environments/app.env') });
 
-        this.protocol = String(process.env.PROTOCOL);
-        this.hostname = String(process.env.HOSTNAME);
-        this.port = Number(process.env.PORT);
+        this.protocol = String(process.env.PROTOCOL) || 'http';
+        this.hostname = String(process.env.HOSTNAME) || 'localhost';
+        this.port = Number(process.env.PORT) || 5000;
         this.dev = process.env.NODE_ENV !== "production";
 
         const link = (this.port !== 80 && this.port !== 443)
