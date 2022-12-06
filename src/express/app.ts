@@ -9,7 +9,9 @@ import helmet from 'helmet';
 import Url from '../models/Url';
 
 // import modules
-import generateKey from '../func/generateKey';
+import generateKey from './generateKey';
+import { AppRoute } from './routes/app.routing';
+import { BadRoute } from './routes/main/bad.routing';
 
 
 
@@ -27,9 +29,8 @@ export class App {
 
     private urlPrefix: string = '';
     private newUrlPrefix: string = '';
-    private dev: boolean = true;
 
-    private server = next({ dev: this.dev, hostname: this.hostname, port: this.port });
+    private server = next({ dev: process.env.NODE_ENV !== "production" });
 
     private urlEncodedParser = bodyParser.urlencoded({ extended: false });
     private jsonEncodeParser = bodyParser.json();
@@ -55,12 +56,12 @@ export class App {
      */
 
     private setEnvironment(): void {
-        dotenv.config({ path: path.resolve(__dirname, '../../src/environments/app.env') });
+        dotenv.config({ path: path.resolve(__dirname, '../../environments/app.env') });
 
         this.protocol = String(process.env.PROTOCOL) || 'http';
         this.hostname = String(process.env.HOSTNAME) || 'localhost';
         this.port = Number(process.env.PORT) || 5000;
-        this.dev = process.env.NODE_ENV !== "production";
+        //this.dev = process.env.NODE_ENV !== "production" || true;
 
         const link = (this.port !== 80 && this.port !== 443)
             ? `${this.protocol}://${this.hostname}:${this.port}/`
@@ -77,19 +78,25 @@ export class App {
     private setNEXT(): void {
     }
 
+
     private registerRoute(): void {
+        const route = new AppRoute(this.server);
         this.server.prepare().then(() => {
 
             const handle = this.server.getRequestHandler();
 
-
+/*
             this.app.get('/', (req, res) => {
                 return this.server.render(req, res, "/index");
             });
-
+*//*
             this.app.get('/502', (req, res) => {
                 return this.server.render(req, res, "/502");
             });
+*/
+            this.app.use('/', route.router);
+
+
 
             this.app.post('/api', this.urlEncodedParser, this.jsonEncodeParser, async (req, res) => {
 
