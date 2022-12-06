@@ -2,14 +2,13 @@
     "name": "url-shortener",
     "version": "1.0.0",
     "description": "short url",
-    "main": "app.js",
+    "main": "./src/index.ts",
     "scripts": {
-        "start": "npm run build && node ./dist/index.js",
-        "build": "tsc",
+        "start": "npm run build && setx NODE_ENV development && npm run dev",
         "dev": "ts-node ./src/index.ts",
+        "build": "tsc",
         "dev:next": "next dev",
-        "build:next": "next build",
-        "start:next": "next start"
+        "build:next": "next build"
     },
     "repository": {
         "type": "git",
