@@ -20,6 +20,6 @@ export class Database {
     }
 
     private setEnvironment(): void {
-        dotenv.config({ path: path.resolve(__dirname, '../../src/environments/mongodb.env') });
+        dotenv.config({ path: path.resolve(__dirname, '../../environments/mongodb.env') });
     }
 }
