@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 
 import Url from '../models/Url';
+import { Env } from './loadENV';
 
 // import modules
 import generateKey from './generateKey';
@@ -27,8 +28,7 @@ export class App {
     private hostname: string = 'localhost';
     private port: number = 5000;
 
-    private urlPrefix: string = '';
-    private newUrlPrefix: string = '';
+    public urlPrefix: string = '';
 
     private server = next({ dev: process.env.NODE_ENV !== "production" });
 
@@ -56,19 +56,11 @@ export class App {
      */
 
     private setEnvironment(): void {
-        dotenv.config({ path: path.resolve(__dirname, '../../environments/app.env') });
+        const ENV = new Env();
 
-        this.protocol = String(process.env.PROTOCOL) || 'http';
-        this.hostname = String(process.env.HOSTNAME) || 'localhost';
-        this.port = Number(process.env.PORT) || 5000;
-        //this.dev = process.env.NODE_ENV !== "production" || true;
-
-        const link = (this.port !== 80 && this.port !== 443)
-            ? `${this.protocol}://${this.hostname}:${this.port}/`
-            : `${this.protocol}://${this.hostname}/`;
-
-        this.urlPrefix = link;
-        this.newUrlPrefix = link;
+        this.protocol = ENV.protocol;
+        this.hostname = ENV.hostname;
+        this.port = ENV.port;
     }
 
     private setHelmet(): void {
@@ -94,10 +86,12 @@ export class App {
                 return this.server.render(req, res, "/502");
             });
 */
-            this.app.use('/', route.router);
+            this.app.use(this.urlEncodedParser);
+            this.app.use(this.jsonEncodeParser);
+            this.app.use(route.router);
 
 
-
+/*
             this.app.post('/api', this.urlEncodedParser, this.jsonEncodeParser, async (req, res) => {
 
                 const { fullUrl } = JSON.parse(req.body.data);
@@ -124,7 +118,7 @@ export class App {
                     const newData = {
                         key: key,
                         longUrl: fullUrl,
-                        shortUrl: this.newUrlPrefix + key
+                        shortUrl: this.urlPrefix + key
                     };
 
                     const shortenerData = new Url(newData);
@@ -146,6 +140,7 @@ export class App {
                     data: urlInfo
                 });
             });
+            */
 
             this.app.get('/:key', this.urlEncodedParser, async (req, res) => {
 
