@@ -1,7 +1,7 @@
 import { NextServer } from "next/dist/server/next";
 import { RouteBase } from "../bases/route.bases";
 
-import { Env } from "../../loadENV";
+import { Env } from "../../loadEnv";
 import Url from "../../../models/Url";
 
 

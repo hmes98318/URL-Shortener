@@ -8,6 +8,7 @@ export class Env {
         this.setEnvironment();
     }
 
+    public node_env: boolean = true;
     public protocol: string = 'http';
     public hostname: string = 'localhost';
     public port: number = 5000;
@@ -17,6 +18,7 @@ export class Env {
     private setEnvironment(): void {
         dotenv.config({ path: path.resolve(__dirname, '../../environments/app.env') });
 
+        this.node_env = String(process.env.NODE_ENV) !== 'production';
         this.protocol = String(process.env.PROTOCOL) || 'http';
         this.hostname = String(process.env.HOSTNAME) || 'localhost';
         this.port = Number(process.env.PORT) || 5000;

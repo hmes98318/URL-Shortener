@@ -3,7 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 
-import { Env } from './loadENV';
+import { Env } from './loadEnv';
 import { AppRoute } from './routes/app.routing';
 
 
@@ -14,19 +14,16 @@ export class App {
         this.registerRoute();
     }
 
+    public node_env: boolean = true;
     private protocol: string = 'http';
     private hostname: string = 'localhost';
     private port: number = 5000;
     public urlPrefix: string = '';
 
-    private server = next({ dev: process.env.NODE_ENV !== "production" });
-
     private urlEncodedParser = bodyParser.urlencoded({ extended: false });
     private jsonEncodeParser = bodyParser.json();
 
     private app = express();
-
-
 
 
     /**
@@ -39,15 +36,14 @@ export class App {
     }
 
     /** 
-     * -------------------------------------------
      * Private Methods
-     * -------------------------------------------
      */
 
     private setEnvironment(): void {
 
         const ENV = new Env();
 
+        this.node_env = ENV.node_env;
         this.protocol = ENV.protocol;
         this.hostname = ENV.hostname;
         this.port = ENV.port;
@@ -59,11 +55,12 @@ export class App {
 
     private registerRoute(): void {
 
-        const route = new AppRoute(this.server);
+        const server = next({ dev: this.node_env });
+        const route = new AppRoute(server);
 
-        this.server.prepare().then(() => {
+        server.prepare().then(() => {
 
-            const handle = this.server.getRequestHandler();
+            const handle = server.getRequestHandler();
 
             this.app.use(this.urlEncodedParser);
             this.app.use(this.jsonEncodeParser);
