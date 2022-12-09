@@ -1,7 +1,7 @@
 node_modules/
 .env
 tsconfig.tsbuildinfo
-
+dist/
 .next/
 
 .DS_Store
