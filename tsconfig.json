@@ -32,9 +32,9 @@
         "src/**/*.ts",
         "page/*.tsx",
         "public/**/*.tsx",
-        "public/images/custom.d.ts",
         "public/images/*.svg",
-        "public/images/*.png"
+        "public/images/*.png",
+        "public/images/*.ico"
     ],
     "exclude": [
         "node_modules",
