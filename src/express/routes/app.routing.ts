@@ -1,10 +1,10 @@
 import { NextServer } from "next/dist/server/next";
 import { RouteBase } from "./bases/route.bases";
 
-import { BadRoute } from "./main/bad.routing";
 import { IdxRoute } from "./main/index.routing";
+import { BadRoute } from "./main/bad.routing";
 import { ApiRoute } from "./main/api.routing";
-
+import { KeyRoute } from "./main/key.routing";
 
 
 export class AppRoute extends RouteBase {
@@ -18,9 +18,11 @@ export class AppRoute extends RouteBase {
         const idxRoute = new IdxRoute(server);
         const badRoute = new BadRoute(server);
         const apiRoute = new ApiRoute(server);
+        const keyRoute = new KeyRoute(server);
 
-        this.router.use('/', idxRoute.router);
-        this.router.use('/502', badRoute.router);
-        this.router.use('/api', apiRoute.router);
+        this.router.use(idxRoute.router); //    /
+        this.router.use(badRoute.router); //    /502
+        this.router.use(apiRoute.router); //    /api
+        this.router.use(keyRoute.router); //    /:key
     }
 }

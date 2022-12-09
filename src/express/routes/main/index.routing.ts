@@ -1,5 +1,5 @@
-import { RouteBase } from "../bases/route.bases";
 import { NextServer } from "next/dist/server/next";
+import { RouteBase } from "../bases/route.bases";
 
 
 export class IdxRoute extends RouteBase {

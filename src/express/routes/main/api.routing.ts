@@ -1,17 +1,12 @@
-import { RouteBase } from "../bases/route.bases";
 import { NextServer } from "next/dist/server/next";
+import { RouteBase } from "../bases/route.bases";
 
-import generateKey from "../../generateKey";
-import Url from "../../../models/Url";
-import bodyParser from 'body-parser';
-import { App } from "../../app";
 import { Env } from "../../loadENV";
+import Url from "../../../models/Url";
+import generateKey from "../../generateKey";
 
 
 export class ApiRoute extends RouteBase {
-
-    private urlEncodedParser = bodyParser.urlencoded({ extended: false });
-    private jsonEncodeParser = bodyParser.json();
 
     public urlPrefix: string = '';
 
@@ -22,12 +17,11 @@ export class ApiRoute extends RouteBase {
 
     private setEnvironment():void{
         const ENV = new Env();
-
         this.urlPrefix = ENV.urlPrefix;
     }
 
     protected registerRoute(server:NextServer) {
-        this.router.post('/', async (req, res) => {
+        this.router.post('/api', async (req, res) => {
 
             const { fullUrl } = JSON.parse(req.body.data);
             const longUrlData = {

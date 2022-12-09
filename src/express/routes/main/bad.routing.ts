@@ -1,5 +1,5 @@
-import { RouteBase } from "../bases/route.bases";
 import { NextServer } from "next/dist/server/next";
+import { RouteBase } from "../bases/route.bases";
 
 
 export class BadRoute extends RouteBase {
@@ -9,7 +9,7 @@ export class BadRoute extends RouteBase {
     }
 
     protected registerRoute(server:NextServer): void {
-        this.router.get('/', (req, res) => {
+        this.router.get('/502', (req, res) => {
             return server.render(req, res, "/502");
         });
     }
