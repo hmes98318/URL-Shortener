@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 
+
 const UrlSchema = new Schema({
     key: {
         type: String,
@@ -14,5 +15,4 @@ const UrlSchema = new Schema({
         required: true
     },
 });
-
 export default model('Url', UrlSchema);

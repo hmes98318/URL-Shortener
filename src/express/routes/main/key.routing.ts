@@ -9,17 +9,17 @@ export class KeyRoute extends RouteBase {
 
     public urlPrefix: string = '';
 
-    constructor(server:NextServer){
+    constructor(server: NextServer) {
         super(server);
         this.setEnvironment();
     }
 
-    private setEnvironment():void{
+    private setEnvironment(): void {
         const ENV = new Env();
         this.urlPrefix = ENV.urlPrefix;
     }
 
-    protected registerRoute(server:NextServer): void {
+    protected registerRoute(server: NextServer): void {
         this.router.get('/:key', async (req, res) => {
 
             const shortKey = req.params.key;

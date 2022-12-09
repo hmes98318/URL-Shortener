@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Stack, HStack } from '@chakra-ui/react';
 
-import { Logo } from '../../Logo';
 import { Copyright } from './Copyright';
 import { SocialMediaLinks } from './SocialMediaLinks';
 import { ColorModeToggle } from '../../ColorModeToggle';

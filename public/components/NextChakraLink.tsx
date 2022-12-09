@@ -8,6 +8,7 @@ export type NextChakraLinkProps = PropsWithChildren<
     NextLinkProps & Omit<LinkProps, "as">
 >;
 
+
 // https://nextjs.org/docs/advanced-features/codemods#name-default-component
 export const NextChakraLink = ({ href, as, replace, scroll, shallow, prefetch, children, ...chakraProps }: NextChakraLinkProps) => {
     return (

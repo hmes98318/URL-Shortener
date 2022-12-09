@@ -58,19 +58,20 @@ export class App {
         const server = next({ dev: this.node_env });
         const route = new AppRoute(server);
 
-        server.prepare().then(() => {
+        server.prepare()
+            .then(() => {
 
-            const handle = server.getRequestHandler();
+                const handle = server.getRequestHandler();
 
-            this.app.use(this.urlEncodedParser);
-            this.app.use(this.jsonEncodeParser);
-            this.app.use(route.router); // call app.routing
+                this.app.use(this.urlEncodedParser);
+                this.app.use(this.jsonEncodeParser);
+                this.app.use(route.router); // call app.routing
 
 
-            this.app.get("*", (req, res) => {
-                return handle(req, res);
-            });
-        })
+                this.app.get("*", (req, res) => {
+                    return handle(req, res);
+                });
+            })
             .catch((err) => {
                 console.error(err);
             })

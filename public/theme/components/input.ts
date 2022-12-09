@@ -1,5 +1,6 @@
 import { StyleConfig } from '@chakra-ui/theme-tools';
 
+
 const Input: StyleConfig = {
 	baseStyle: {
 		_focus: {

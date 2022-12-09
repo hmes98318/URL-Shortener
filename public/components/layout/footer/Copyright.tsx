@@ -9,7 +9,7 @@ interface CopyrightProps extends TextProps {
 export const Copyright = (props: CopyrightProps) => {
 	return (
 		<Text fontSize="sm" {...props}>
-			&copy; {new Date().getFullYear()} {props.name}, Inc. All rights reserved.
+			&copy; {new Date().getFullYear()} {props.name}, All rights reserved.
 		</Text>
 	);
 }

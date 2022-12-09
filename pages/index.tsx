@@ -19,12 +19,10 @@ import { Check, Copy, Refresh } from '@icon-park/react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import isUrl from 'is-url';
 import axios from 'axios';
+import type { NextPage } from 'next';
 
 import { Layout } from '../public/components/layout/layout';
 import { NextChakraLink } from '../public/components/NextChakraLink';
-
-import type { NextPage } from 'next';
-
 
 
 export async function getStaticProps() {
@@ -32,7 +30,10 @@ export async function getStaticProps() {
         props: {},
     };
 }
+
+
 const Home: NextPage = () => {
+
     const toast = useToast();
 
     const inputActiveBg = useColorModeValue('gray.300', 'rgba(132,133,141,0.24)');
@@ -48,17 +49,18 @@ const Home: NextPage = () => {
     const handleClick = async () => {
 
         setLoading(true);
-
+        //------------------------------------------//
         const sendData = {
             method: 'POST',
             data: JSON.stringify({ fullUrl: url })
         }
         console.log(sendData);
 
-
-        const res = await axios.post('/api', sendData)
+        const res = await axios.post('/api', sendData);
+        //------------------------------------------//
         setLoading(false);
         console.log(res.data);
+
 
         if (res.status === 201) {
             const { data } = await res.data;

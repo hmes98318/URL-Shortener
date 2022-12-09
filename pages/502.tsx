@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Center, Heading, Spacer, Stack, VStack } from "@chakra-ui/react";
-import { Text } from '@chakra-ui/react';
+import { Center, Heading, VStack, Text } from "@chakra-ui/react";
+
 import { Layout } from "../public/components/layout/layout";
+
 
 export default () => {
     return (

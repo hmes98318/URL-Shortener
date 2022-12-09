@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 export class Env {
 
-    constructor(){
+    constructor() {
         this.setEnvironment();
     }
 

@@ -10,17 +10,17 @@ export class ApiRoute extends RouteBase {
 
     public urlPrefix: string = '';
 
-    constructor(server:NextServer){
+    constructor(server: NextServer) {
         super(server);
         this.setEnvironment();
     }
 
-    private setEnvironment():void{
+    private setEnvironment(): void {
         const ENV = new Env();
         this.urlPrefix = ENV.urlPrefix;
     }
 
-    protected registerRoute(server:NextServer) {
+    protected registerRoute(server: NextServer) {
         this.router.post('/api', async (req, res) => {
 
             const { fullUrl } = JSON.parse(req.body.data);
@@ -51,8 +51,7 @@ export class ApiRoute extends RouteBase {
                 };
 
                 const shortenerData = new Url(newData);
-                shortenerData
-                    .save()
+                shortenerData.save()
                     .catch((err) => {
                         console.error(err);
                         return server.render(req, res, "/502");

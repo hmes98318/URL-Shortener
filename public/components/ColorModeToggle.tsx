@@ -12,9 +12,8 @@ export const ColorModeToggle = () => {
 		<Sun size="24" />
 	);
 	const handleToggleColorMode = () => {
-		toggleColorMode()
+		toggleColorMode();
 	}
-
 
 	return (
 		<>
