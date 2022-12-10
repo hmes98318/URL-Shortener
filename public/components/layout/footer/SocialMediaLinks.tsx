@@ -1,6 +1,6 @@
 import React from 'react';
 import { ButtonGroup, ButtonGroupProps, IconButton } from '@chakra-ui/react';
-import { GithubOne, Twitter } from '@icon-park/react';
+import { GithubOne, Zijinyunying } from '@icon-park/react';
 
 
 export const SocialMediaLinks = (props: ButtonGroupProps) => {
@@ -8,17 +8,17 @@ export const SocialMediaLinks = (props: ButtonGroupProps) => {
 		<ButtonGroup variant="ghost" {...props}>
 			<IconButton
 				as="a"
-				href="https://github.com/hmes98318"
+				href="https://github.com/hmes98318/URL-Shortener"
 				aria-label="GitHub"
 				target="_blank"
 				icon={<GithubOne size="20px" />}
 			/>
 			<IconButton
 				as="a"
-				href="#"
-				aria-label="Twitter"
+				href="https://ggwp.tw"
+				aria-label="Homepage"
 				target="_blank"
-				icon={<Twitter size="20px" />}
+				icon={<Zijinyunying size="20px" />}
 			/>
 		</ButtonGroup>
 	);
