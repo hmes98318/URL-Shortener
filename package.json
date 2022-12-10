@@ -4,7 +4,7 @@
     "description": "short url",
     "main": "./src/index.ts",
     "scripts": {
-        "start": "npm run build && npm run dev",
+        "start": "npm run build:ts && npm run dev",
         "build": "next build",
         "dev": "ts-node ./src/index.ts",
         "build:ts": "tsc"
