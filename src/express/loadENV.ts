@@ -12,7 +12,7 @@ export class Env {
     public protocol: string = 'http';
     public hostname: string = 'localhost';
     public port: number = 5000;
-    public urlPrefix: string = '';
+    public urlPrefix: string = 'http://localhost:5000/';
 
 
     private setEnvironment(): void {

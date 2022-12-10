@@ -1,7 +1,7 @@
 import next from "next";
 import express from 'express';
 import bodyParser from 'body-parser';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 
 import { Env } from './loadEnv';
 import { AppRoute } from './routes/app.routing';
@@ -14,11 +14,11 @@ export class App {
         this.registerRoute();
     }
 
-    public node_env: boolean = true;
+    private node_env: boolean = true;
     private protocol: string = 'http';
     private hostname: string = 'localhost';
     private port: number = 5000;
-    public urlPrefix: string = '';
+    private urlPrefix: string = '';
 
     private urlEncodedParser = bodyParser.urlencoded({ extended: false });
     private jsonEncodeParser = bodyParser.json();
@@ -31,7 +31,7 @@ export class App {
      */
     public bootloader(): void {
         this.app.listen(this.port, () => {
-            console.log(`Server start listening: ${this.protocol}://${this.hostname}:${this.port}`);
+            console.log(`Server start listening: ${this.urlPrefix}`);
         });
     }
 
@@ -47,6 +47,7 @@ export class App {
         this.protocol = ENV.protocol;
         this.hostname = ENV.hostname;
         this.port = ENV.port;
+        this.urlPrefix = ENV.urlPrefix;
     }
 
     private setHelmet(): void {
@@ -72,8 +73,8 @@ export class App {
                     return handle(req, res);
                 });
             })
-            .catch((err) => {
-                console.error(err);
+            .catch((error) => {
+                console.error(error);
             })
     }
 }
